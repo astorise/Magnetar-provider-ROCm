@@ -1,0 +1,30 @@
+[workspace]
+
+[package]
+name = "magnetar-provider-rocm"
+version = "0.1.0"
+edition = "2024"
+# Never published to crates.io independently -- this crate is only
+# buildable from within a checkout of the parent Magnetar repository,
+# matching every other externalized module's own Cargo.toml.
+publish = false
+
+[dependencies]
+# Path dependency, not a published crate: this crate is only buildable
+# from within a checkout of the parent Magnetar repository, with this
+# submodule checked out at `providers/rocm`.
+magnetar-runtime = { path = "../../magnetar-runtime" }
+# Dynamically loads the real ROCm HIP runtime shared library at runtime
+# (`amdhip64.dll`/`libamdhip64.so`) instead of linking against it at build
+# time -- the same "no build-time GPU-vendor dependency" shape
+# `providers/cuda`'s own `cudarc` dynamic-loading feature already
+# establishes, so this crate keeps building and testing on a machine or CI
+# runner with no ROCm installation at all (every machine/runner this
+# repository currently has). `libloading` (not a ROCm-specific binding
+# crate) was chosen deliberately: the real HIP API surface this baseline
+# actually calls is a handful of stable, well-documented driver-style
+# entry points (`hipInit`/`hipGetDeviceCount`/`hipDeviceGet`/
+# `hipDeviceGetName`), small and stable enough to declare directly
+# (`src/hip_sys.rs`) rather than pull in a small, far-less-established
+# ROCm binding crate for them.
+libloading = "0.8"
