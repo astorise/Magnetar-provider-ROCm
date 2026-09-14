@@ -36,9 +36,7 @@
 use magnetar_runtime::affinity::ProviderHealth;
 use magnetar_runtime::provider::{Provider, ProviderError, ProviderMetadata, ProviderRegistry};
 
-use crate::hip_sys::{
-    HIP_LIBRARY_CANDIDATES, HIP_SUCCESS, HipGetDeviceCountFn, HipInitFn,
-};
+use crate::hip_sys::{HIP_LIBRARY_CANDIDATES, HIP_SUCCESS, HipGetDeviceCountFn, HipInitFn};
 
 const ROCM_PROVIDER_NAME: &str = "rocm";
 const ROCM_PROVIDER_VERSION: &str = env!("CARGO_PKG_VERSION");
