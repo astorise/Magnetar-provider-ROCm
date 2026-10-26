@@ -29,4 +29,4 @@ magnetar-runtime = { version = "1.0.0-RC0", path = "../../magnetar-runtime" }
 # `hipDeviceGetName`), small and stable enough to declare directly
 # (`src/hip_sys.rs`) rather than pull in a small, far-less-established
 # ROCm binding crate for them.
-libloading = "0.8"
+libloading = "0.9"
