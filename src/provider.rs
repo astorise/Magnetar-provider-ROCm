@@ -83,7 +83,7 @@ impl RocmProvider {
     fn discover_device_count() -> Option<i32> {
         let library = HIP_LIBRARY_CANDIDATES
             .iter()
-            .find_map(|name| unsafe { libloading::Library::new(name).ok() })?;
+            .find_map(|name| unsafe { libloading::Library::new(*name).ok() })?;
 
         // SAFETY: `hipInit`/`hipGetDeviceCount` are real, stable, publicly
         // documented HIP runtime API entry points (`hip_sys.rs`); the
