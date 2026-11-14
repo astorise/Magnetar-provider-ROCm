@@ -50,7 +50,7 @@ honestly reporting unavailability when that is the truth.
 
 1. Extend `src/hip_sys.rs` with the real per-device enumeration API
    (`hipDeviceGet`/`hipGetDeviceProperties` or `hipDeviceGetName`) and
-   build real `magnetar_runtime::device::DeviceDescriptor` values from it,
+   build real `magnetar_core::device::DeviceDescriptor` values from it,
    mirroring `providers/cuda`'s own `device.rs`.
 2. Implement `hipModuleLoadData`/hipRTC-based Kernel compilation and
    `ProviderExecutionApi`, mirroring `providers/cuda`'s own
@@ -77,6 +77,10 @@ never the reverse -- `magnetar-runtime` has zero compile-time dependency
 on this crate (the same externalization invariant every Provider/Component/
 Format module in this workspace observes). It is pinned into the main
 Magnetar repository as a git submodule at `providers/rocm`.
+
+This crate depends on `magnetar-provider-api` (the Provider contract) and
+`magnetar-core`, not on `magnetar-runtime`: Runtime changes above those layers
+no longer reach its lockfile.
 
 ## Continuous integration
 

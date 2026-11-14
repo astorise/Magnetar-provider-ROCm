@@ -33,8 +33,10 @@
 //! normal, expected outcome, the same posture `providers/cuda`'s
 //! `CudaProvider` established first.
 
-use magnetar_runtime::affinity::ProviderHealth;
-use magnetar_runtime::provider::{Provider, ProviderError, ProviderMetadata, ProviderRegistry};
+use magnetar_core::provider_status::ProviderHealth;
+use magnetar_provider_api::provider_api::{
+    Provider, ProviderError, ProviderMetadata, ProviderRegistry,
+};
 
 use crate::hip_sys::{HIP_LIBRARY_CANDIDATES, HIP_SUCCESS, HipGetDeviceCountFn, HipInitFn};
 
